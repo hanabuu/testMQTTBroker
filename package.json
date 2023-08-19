@@ -1,0 +1,25 @@
+{
+  "name": "testmqttbroker",
+  "version": "1.0.0",
+  "description": "node index.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hanabuu/testMQTTBroker.git"
+  },
+  "keywords": [
+    "mqtt"
+  ],
+  "author": "hanabusa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hanabuu/testMQTTBroker/issues"
+  },
+  "homepage": "https://github.com/hanabuu/testMQTTBroker#readme",
+  "dependencies": {
+    "mosca": "^2.8.3"
+  }
+}
