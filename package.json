@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/hanabuu/testMQTTBroker#readme",
   "dependencies": {
-    "mosca": "^2.8.3"
+    "aedes": "^0.50.0"
   }
 }

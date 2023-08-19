@@ -1,7 +1,15 @@
-var mosca = require('mosca');
-var server = new mosca.Server({
-    port: 1883,
-});
+// var mosca = require('mosca');
+// var server = new mosca.Server({
+//     port: 1883,
+// });
+let aedes = require('aedes')()
+const server = require('net').createServer(aedes.handle)
+const port = 1883
+
+server.listen(port, function () {
+  console.log('server started and listening on port ', port)
+})
+
 
 server.on('ready', function(){
     console.log('Server is ready.');
