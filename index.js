@@ -1,3 +1,7 @@
+/**
+ * index.js
+ * MQTTのbrokerの役割
+ */
 // var mosca = require('mosca');
 // var server = new mosca.Server({
 //     port: 1883,
@@ -6,37 +10,48 @@ let aedes = require('aedes')()
 const server = require('net').createServer(aedes.handle)
 const port = 1883
 
-server.listen(port, function () {
-  console.log('server started and listening on port ', port)
-})
+// aedes.on('ready', function(){
+//     console.log('Server is ready.');
+// });
 
-
-server.on('ready', function(){
-    console.log('Server is ready.');
-});
-
-server.on('clientConnected', function(client){
+/**
+ * 新しいクライアントが接続した場合
+ */
+aedes.on('client', (client) => {
     console.log('broker.on.connected.', 'client:', client.id);
 });
 
-server.on('clientDisconnected', function(client){
-    console.log('broker.on.disconnected.', 'client:', client.id);
-});
+// aedes.on('clientDisconnected', function(client){
+//     console.log('broker.on.disconnected.', 'client:', client.id);
+// });
 
-server.on('subscribed', function(topic, client){
+/**
+ * 新しいsubscriberが接続した場合
+ */
+aedes.on('subscribe', (topic, client) => {
     console.log('broker.on.subscribed.', 'client:', client.id, 'topic:', topic);
 });
 
-server.on('unsubscribed', function(topic, client){
-    console.log('broker.on.unsubscribed.', 'client:', client.id); 
-});
+// aedes.on('unsubscribed', function(topic, client){
+//     console.log('broker.on.unsubscribed.', 'client:', client.id); 
+// });
 
-server.on('published', function(packet, client){
+/**
+ *  publishされた場合
+ */
+aedes.on('publish', (packet, client) => {
+    console.log('broker.on.published.', 'client:', client.id);
     if (/\/new\//.test(packet.topic)){
         return;
     }
     if (/\/disconnect\//.test(packet.topic)){
         return;
     }
-    console.log('broker.on.published.', 'client:', client.id);
+    // console.log('broker.on.published.', 'client:', client.id);
 });
+
+
+server.listen(port, function () {
+    console.log('server started and listening on port ', port)
+  })
+  
