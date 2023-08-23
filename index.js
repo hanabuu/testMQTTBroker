@@ -18,29 +18,29 @@ const port = 1883
  * 新しいクライアントが接続した場合
  */
 aedes.on('client', (client) => {
-    console.log('broker.on.connected.', 'client:', client.id);
+    console.log('broker.on.connected.', 'client:', (client ? client.id : client));
 });
 
-// aedes.on('clientDisconnected', function(client){
-//     console.log('broker.on.disconnected.', 'client:', client.id);
-// });
+aedes.on('clientDisconnected', function(client){
+    console.log('broker.on.disconnected.', 'client:', (client ? client.id : client));
+});
 
 /**
  * 新しいsubscriberが接続した場合
  */
 aedes.on('subscribe', (topic, client) => {
-    console.log('broker.on.subscribed.', 'client:', client.id, 'topic:', topic);
+    console.log('broker.on.subscribed.', 'client:', (client ? client.id : client), 'topic:', topic);
 });
 
-// aedes.on('unsubscribed', function(topic, client){
-//     console.log('broker.on.unsubscribed.', 'client:', client.id); 
-// });
+aedes.on('unsubscribed', function(topic, client){
+    console.log('broker.on.unsubscribed.', 'client:', (client ? client.id : client)); 
+});
 
 /**
  *  publishされた場合
  */
 aedes.on('publish', (packet, client) => {
-    console.log('broker.on.published.', 'client:', client.id);
+    console.log('broker.on.published.', 'client:', (client ? client.id : client));
     if (/\/new\//.test(packet.topic)){
         return;
     }
